@@ -29,7 +29,9 @@
 (require 'yankpad)
 (require 'org)
 
-(defun meq/ddm (name)
+(defvar ext-def '(org md))
+
+(defun meq/ddm (name ext)
     (setq yankpad-file-backup yankpad-file)
     (setq yankpad-file
         ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
@@ -44,9 +46,17 @@
             (:else (buffer-file-name))))))
     (yankpad-append-category (concat name "-mode"))
     (setq yankpad-file yankpad-file-backup)
-    (add-to-list 'auto-mode-alist '((concat "\\." name ".org\\'") . (intern (concat name "-mode")))))
+    (add-to-list 'auto-mode-alist '((concat "\\." name "." ext "\\'") . (intern (concat name "-mode")))))
 
-(define-derived-mode titan-mode org-mode "titan" (meq/ddm "titan"))
+(defun meq/mapc-ddm (name &optional ext-list) (mapc #'(lambda (ext*) (interactive)
+    (let* ((ext (symbol-name ext*)))
+        (eval `(define-derived-mode
+            ,(intern (concat name "-" ext "-mode"))
+            ,(intern (concat "titan-" ext "-mode"))
+            (meq/ddm ,name ,ext))))) (or ext-list ext-def)))
+
+(define-derived-mode titan-org-mode org-mode "titan-org" (meq/ddm "titan" "org"))
+(define-derived-mode titan-md-mode markdown-mode "titan-md" (meq/ddm "titan" "md"))
 
 (provide 'titan)
 ;;; titan.el ends here
