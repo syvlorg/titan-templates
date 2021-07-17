@@ -35,8 +35,10 @@
 (require 'yasnippet)
 (require 'yankpad)
 (require 'org)
+(require 'dash)
 
-(defvar ext-def '(org md))
+(defvar meq/var/ext-def '(org md adoc))
+(defvar meq/var/mode-def '(org markdown adoc))
 
 (defun meq/ddm (name ext)
     (setq yankpad-file-backup yankpad-file)
@@ -60,10 +62,19 @@
         (eval `(define-derived-mode
             ,(intern (concat name "-" ext "-mode"))
             ,(intern (concat "titan-" ext "-mode"))
-            (meq/ddm ,name ,ext))))) (or ext-list ext-def)))
+            (meq/ddm ,name ,ext))))) (or ext-list meq/var/ext-def)))
 
 (define-derived-mode titan-org-mode org-mode "titan-org" (meq/ddm "titan" "org"))
 (define-derived-mode titan-md-mode markdown-mode "titan-md" (meq/ddm "titan" "md"))
+
+(mapc #'(lambda (mode-cons) (interactive)
+    (let* ((mode (symbol-name (car mode-cons)))
+            (ext (symbol-name (cdr mode-cons))))
+        (eval `(define-derived-mode
+            ,(intern (concat "titan-" ext "-mode"))
+            ,(intern (concat mode "-mode"))
+            ,(concat "titan-" ext)
+            ,(meq/ddm "titan" ext))))) (-zip-with #'cons meq/var/mode-def meq/var/ext-def))
 
 (provide 'titan)
 ;;; titan.el ends here
