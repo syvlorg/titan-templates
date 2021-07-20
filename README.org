@@ -65,7 +65,9 @@
             ,(intern (concat name "-" ext "-mode"))
             ,(intern (concat "titan-" ext "-mode"))
             (meq/ddm ,name ,ext)
-            ,@args)))) (or ext-list meq/var/ext-def)))
+            ,@args))
+        (autoload (intern (concat name "-" ext "-mode")) (concat name ".el") nil t))) (or ext-list
+                                                                                        meq/var/ext-def)))
 
 (mapc #'(lambda (mode-cons) (interactive)
     (let* ((mode (symbol-name (car mode-cons)))
