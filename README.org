@@ -36,36 +36,36 @@
 (require 'yankpad)
 (require 'org)
 (require 'dash)
+(require 'alloy)
 
 (defvar meq/var/ext-def '(org md adoc))
 (defvar meq/var/mode-def '(org markdown adoc))
 
 (defun meq/ddm (name ext)
-    (setq yankpad-file-backup yankpad-file)
-    (setq yankpad-file
-        ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
-        (expand-file-name
-        "yankpad.org"
-        (file-name-directory
-            ;; Copied from ‘f-this-file’ from f.el.
-            (cond
-            (load-in-progress load-file-name)
-            ((and (boundp 'byte-compile-current-file) byte-compile-current-file)
-            byte-compile-current-file)
-            (:else (buffer-file-name))))))
-    (yankpad-append-category (concat name "-mode"))
-    (setq yankpad-file yankpad-file-backup)
+    (let* ((yankpad-file*
+                ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
+                (expand-file-name
+                "yankpad.org"
+                (file-name-directory
+                    ;; Copied from ‘f-this-file’ from f.el.
+                    (cond
+                    (load-in-progress load-file-name)
+                    ((and (boundp 'byte-compile-current-file) byte-compile-current-file)
+                    byte-compile-current-file)
+                    (:else (buffer-file-name)))))))
+        (when yankpad-file* (setq yankpad-file-backup yankpad-file)
+            (setq yankpad-file yankpad-file*)
+            (yankpad-append-category (concat name "-mode"))
+            (setq yankpad-file yankpad-file-backup)))
     (add-to-list 'auto-mode-alist '((concat "\\." name "." ext "\\'") . (intern (concat name "-mode")))))
 
-(defun meq/mapc-ddm (name &optional ext-list) (mapc #'(lambda (ext*) (interactive)
+(defmacro meq/mapc-ddm (name &optional ext-list &rest args) (mapc #'(lambda (ext*) (interactive)
     (let* ((ext (symbol-name ext*)))
         (eval `(define-derived-mode
             ,(intern (concat name "-" ext "-mode"))
             ,(intern (concat "titan-" ext "-mode"))
-            (meq/ddm ,name ,ext))))) (or ext-list meq/var/ext-def)))
-
-(define-derived-mode titan-org-mode org-mode "titan-org" (meq/ddm "titan" "org"))
-(define-derived-mode titan-md-mode markdown-mode "titan-md" (meq/ddm "titan" "md"))
+            (meq/ddm ,name ,ext)
+            ,@args)))) (or ext-list meq/var/ext-def)))
 
 (mapc #'(lambda (mode-cons) (interactive)
     (let* ((mode (symbol-name (car mode-cons)))
