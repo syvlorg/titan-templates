@@ -28,13 +28,13 @@
 (require 'yasnippet)
 (require 'yankpad)
 (require 'org)
-(require 'dash)
-(require 'alloy)
 
-(defvar meq/var/ext-def '(org md adoc))
-(defvar meq/var/mode-def '(org markdown adoc))
+(defun meq/setup-titan (name)
+    (eval `(defvar ,(intern (concat "meq/var/titan-" name "-mode")) nil))
+    (eval `(defvar ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup")) nil)))
 
-(defun meq/ddm (name ext)
+(defun meq/enable-titan (name)
+    (eval `(setq ,(intern (concat "meq/var/titan-" name "-mode")) t))
     (let* ((yankpad-file*
                 ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
                 (expand-file-name
@@ -46,30 +46,16 @@
                     ((and (boundp 'byte-compile-current-file) byte-compile-current-file)
                     byte-compile-current-file)
                     (:else (buffer-file-name)))))))
-        (when yankpad-file* (setq yankpad-file-backup yankpad-file)
+        (when yankpad-file*
+            (eval `(setq ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup")) yankpad-file))
             (setq yankpad-file yankpad-file*)
-            (yankpad-append-category (concat name "-mode"))
-            (setq yankpad-file yankpad-file-backup)))
-    (add-to-list 'auto-mode-alist '((concat "\\." name "." ext "\\'") . (intern (concat name "-mode")))))
+            (yankpad-map)
+            (yankpad-set-category name))))
 
-(defmacro meq/mapc-ddm (name &optional ext-list &rest args) (mapc #'(lambda (ext*) (interactive)
-    (let* ((ext (symbol-name ext*)))
-        (eval `(define-derived-mode
-            ,(intern (concat name "-" ext "-mode"))
-            ,(intern (concat "titan-" ext "-mode"))
-            (meq/ddm ,name ,ext)
-            ,@args))
-        (autoload (intern (concat name "-" ext "-mode")) (concat name ".el") nil t))) (or ext-list
-                                                                                        meq/var/ext-def)))
-
-(mapc #'(lambda (mode-cons) (interactive)
-    (let* ((mode (symbol-name (car mode-cons)))
-            (ext (symbol-name (cdr mode-cons))))
-        (eval `(define-derived-mode
-            ,(intern (concat "titan-" ext "-mode"))
-            ,(intern (concat mode "-mode"))
-            ,(concat "titan-" ext)
-            ,(meq/ddm "titan" ext))))) (-zip-with #'cons meq/var/mode-def meq/var/ext-def))
+(defun meq/disable-titan (name)
+    (eval `(setq ,(intern (concat "meq/var/titan-" name "-mode")) nil))
+    (eval `(setq yankpad-file ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup"))))
+    (yankpad-map))
 
 (provide 'titan)
 ;;; titan.el ends here
