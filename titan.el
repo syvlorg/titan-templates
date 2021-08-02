@@ -28,13 +28,14 @@
 (require 'yasnippet)
 (require 'yankpad)
 (require 'org)
+(require 'meq)
 
 (defun meq/setup-titan (name)
-    (eval `(defvar ,(intern (concat "meq/var/titan-" name "-mode")) nil))
-    (eval `(defvar ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup")) nil)))
+    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
+    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") nil)))
 
 (defun meq/enable-titan (name)
-    (eval `(setq ,(intern (concat "meq/var/titan-" name "-mode")) t))
+    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") t))
     (let* ((yankpad-file*
                 ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
                 (expand-file-name
@@ -47,14 +48,14 @@
                     byte-compile-current-file)
                     (:else (buffer-file-name)))))))
         (when yankpad-file*
-            (eval `(setq ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup")) yankpad-file))
+            (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") yankpad-file))
             (setq yankpad-file yankpad-file*)
             (yankpad-map)
             (yankpad-set-category name))))
 
 (defun meq/disable-titan (name)
-    (eval `(setq ,(intern (concat "meq/var/titan-" name "-mode")) nil))
-    (eval `(setq yankpad-file ,(intern (concat "meq/var/titan-" name "-yankpad-file-backup"))))
+    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
+    (eval `(setq yankpad-file ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup")))
     (yankpad-map))
 
 (provide 'titan)
