@@ -28,42 +28,39 @@
 
 ;;; Commentary:
 
-;; Put a description of the package here
+;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el
 
 ;;; Code:
 
 (require 'yasnippet)
-(require 'yankpad)
-(require 'org)
 (require 'meq)
 
 (defun meq/setup-titan (name)
     (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
-    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") nil)))
-
-(defun meq/enable-titan (name)
-    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") t))
-    (let* ((yankpad-file*
-                ;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el#L35
-                (expand-file-name
-                "yankpad.org"
+    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") nil))
+    (eval `(setq
+            ,(meq/inconcat name "snippets")
+            (expand-file-name
+                "snippets"
                 (file-name-directory
                     ;; Copied from ‘f-this-file’ from f.el.
                     (cond
                     (load-in-progress load-file-name)
                     ((and (boundp 'byte-compile-current-file) byte-compile-current-file)
                     byte-compile-current-file)
-                    (:else (buffer-file-name)))))))
-        (when yankpad-file*
-            (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") yankpad-file))
-            (setq yankpad-file yankpad-file*)
-            (yankpad-map)
-            (yankpad-set-category name))))
+                    (:else (buffer-file-name))))))))
+
+(defun meq/enable-titan (name)
+    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") t))
+    (add-to-list 'yas-snippet-dirs (meq/inconcat name "snippets") t)
+    (eval `(yas-load-directory ,(meq/inconcat name "snippets") t))
+    (yas-minor-mode 1))
 
 (defun meq/disable-titan (name)
     (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
-    (eval `(setq yankpad-file ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup")))
-    (yankpad-map))
+    (delete (meq/inconcat name "snippets") yas-snippet-dirs)
+    (yas-reload-all)
+    (yas-minor-mode 0))
 
 (provide 'titan)
 ;;; titan.el ends here
