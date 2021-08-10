@@ -32,14 +32,15 @@
 
 ;;; Code:
 
-(require 'yasnippet)
 (require 'meq)
+(require 'yasnippet)
 
-(defun meq/setup-titan (name)
-    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
-    (eval `(defvar ,(meq/inconcat "meq/var/titan-" name "-yankpad-file-backup") nil))
-    (eval `(setq
-            ,(meq/inconcat name "snippets")
+(defvar meq/var/ext-def '(org md adoc))
+(defvar meq/var/mode-def '(org markdown adoc))
+
+(defun meq/ddm (name ext)
+    (eval `(setq-local
+            ,(meq/inconcat name "-snippets")
             (expand-file-name
                 "snippets"
                 (file-name-directory
@@ -48,19 +49,30 @@
                     (load-in-progress load-file-name)
                     ((and (boundp 'byte-compile-current-file) byte-compile-current-file)
                     byte-compile-current-file)
-                    (:else (buffer-file-name))))))))
+                    ;; Adapted From:
+                    ;; Answer: https://stackoverflow.com/a/1344894/10827766
+                    ;; User: https://stackoverflow.com/users/8355/cjm
+                    (:else (symbol-file ',(intern (concat name "-" ext "-mode")))))))))
+    (add-to-list 'yas-snippet-dirs (meq/inconcat name "-snippets") t)
+    (eval `(yas-load-directory ,(meq/inconcat name "-snippets") t)))
 
-(defun meq/enable-titan (name)
-    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") t))
-    (add-to-list 'yas-snippet-dirs (meq/inconcat name "snippets") t)
-    (eval `(yas-load-directory ,(meq/inconcat name "snippets") t))
-    (yas-minor-mode 1))
+(defun meq/mapc-ddm (name &optional ext-list &rest args) (mapc #'(lambda (ext*) (interactive)
+    (let* ((ext (symbol-name ext*)))
+        (eval `(define-derived-mode
+            ,(intern (concat name "-" ext "-mode"))
+            ,(intern (concat "titan-" ext "-mode"))
+            (meq/ddm ,name ,ext)
+            ,@args)))) (or ext-list meq/var/ext-def)))
 
-(defun meq/disable-titan (name)
-    (eval `(setq ,(meq/inconcat "meq/var/titan-" name "-mode") nil))
-    (delete (meq/inconcat name "snippets") yas-snippet-dirs)
-    (yas-reload-all)
-    (yas-minor-mode 0))
+(mapc #'(lambda (mode-cons) (interactive)
+    (let* ((mode (symbol-name (car mode-cons)))
+            (ext (symbol-name (cdr mode-cons))))
+        (eval `(define-derived-mode
+            ,(intern (concat "titan-" ext "-mode"))
+            ,(intern (concat mode "-mode"))
+            ,(concat "titan-" ext)
+            ;; ,(meq/ddm "titan" ext)
+            )))) (-zip-with #'cons meq/var/mode-def meq/var/ext-def))
 
 (provide 'titan)
 ;;; titan.el ends here
