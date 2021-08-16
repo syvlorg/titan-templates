@@ -64,13 +64,6 @@
             (meq/ddm ,name ,ext)
             ,@args)))) (or ext-list meq/var/ext-def)))
 
-(defun meq/rename-and-replace nil (interactive)
-    (when (derived-mode-p 'titan-mode)
-        (let* ((name (replace-regexp-in-string "---" "-" (string-join (save-excursion (goto-line 1) (split-line (split-string (thing-at-point 'line) " "))) "-"))))
-            (meq/rename-current-buffer-file name))))
-
-(add-hook 'after-save-hook #'meq/rename-and-replace)
-
 (mapc #'(lambda (mode-cons) (interactive)
     (let* ((mode (symbol-name (car mode-cons)))
             (ext (symbol-name (cdr mode-cons))))
