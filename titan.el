@@ -64,7 +64,7 @@
             ,(intern (concat "titan-" ext "-mode"))
             ,(intern (concat mode "-mode"))
             ,(concat "titan-" ext)
-            ;; ,(meq/ddm "titan" ext)
+            ,(meq/ddm "titan" ext)
             )))) (-zip-with #'cons meq/var/mode-def meq/var/ext-def))
 
 (provide 'titan)

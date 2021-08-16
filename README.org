@@ -71,9 +71,48 @@
             ,(intern (concat "titan-" ext "-mode"))
             ,(intern (concat mode "-mode"))
             ,(concat "titan-" ext)
-            ;; ,(meq/ddm "titan" ext)
+            ,(meq/ddm "titan" ext)
             )))) (-zip-with #'cons meq/var/mode-def meq/var/ext-def))
 
 (provide 'titan)
 ;;; titan.el ends here
+#+end_src
+
+* snippets
+** markdown-mode
+
+#+begin_src markdown :tangle snippets/titan-markdown-mode/titan
+# key: template
+# name: markdown titan template
+# binding: m
+# --
+# `(meq/basename)`
+## Links
+
+## Tags
+
+## Notes
+
+## Contents
+
+$0
+#+end_src
+
+** org-mode
+
+#+begin_src org :tangle snippets/titan-org-mode/titan
+# key: template
+# name: org titan template
+# binding: o
+# --
+,* `(meq/basename)`
+,** Links
+
+,** Tags
+
+,** Notes
+
+,** Contents
+
+$0
 #+end_src
