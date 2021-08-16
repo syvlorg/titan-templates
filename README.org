@@ -106,11 +106,16 @@ $0
 # binding: o
 # --
 ,* `(meq/basename)`
+
+--------------
+
 ,** Links
 
 ,** Tags
 
 ,** Notes
+
+--------------
 
 ,** Contents
 
