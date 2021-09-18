@@ -1,10 +1,9 @@
-#!/usr/bin/env mdsh
-#+property: header-args -n -r -l "[{(<%s>)}]" :tangle-mode (identity 0444) :noweb yes :mkdirp yes
-#+startup: show3levels
+#+setupfile: ./settings/README.org
+#+include: ./settings/README.org
 
-* titan
+* titan.el
 
-#+begin_src emacs-lisp :tangle titan.el
+#+begin_src emacs-lisp :tangle (meq/tangle-path)
 ;;; titan.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
@@ -106,9 +105,10 @@
 #+end_src
 
 * snippets
-** markdown-mode
+** titan-markdown-mode
+*** titan
 
-#+begin_src markdown :tangle snippets/titan-markdown-mode/titan
+#+begin_src markdown :tangle (meq/tangle-path)
 # key: template
 # name: markdown titan template
 # binding: m
@@ -133,9 +133,10 @@
 $0
 #+end_src
 
-** org-mode
+** titan-org-mode
+*** titan
 
-#+begin_src org :tangle snippets/titan-org-mode/titan
+#+begin_src org :tangle (meq/tangle-path)
 # key: template
 # name: org titan template
 # binding: o
