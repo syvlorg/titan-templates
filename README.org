@@ -39,7 +39,7 @@
     (markdown . md)
     (adoc . adoc)))
     
-(defmacro meq/titan-append-modes (mode &rest exts) (let* ((titan-exts (meq/inconcat "meq/var/titan-" (symbol-name mode) "-exts"))) (append (when titan-exts titan-exts) exts)))
+(defmacro meq/titan-append-modes (mode &rest exts) (let* ((titan-exts (meq/inconcat "meq/var/titan-" (symbol-name mode) "-exts"))) (append (and (symbol-value titan-exts) nil) exts)))
 
 (with-eval-after-load 'use-package
     ;; Primarily adapted from https://gitlab.com/to1ne/use-package-hydra/-/blob/master/use-package-hydra.el
