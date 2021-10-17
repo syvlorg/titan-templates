@@ -74,13 +74,13 @@
             (name-exts (meq/inconcat "meq/var/" name "-" mode "-exts"))
             (all-name-exts (meq/inconcat "meq/var/" name "-exts"))
             (name-mode (meq/inconcat name "-" mode "-mode")))
-        (eval `(defvar ,name-exts ',((rassoc name-mode exts))))
+        (eval `(defvar ,name-exts ',(rassoc name-mode exts)))
         (eval `(setq auto-mode-alist ',(append auto-mode-alist name-exts)))
         (if all-name-exts
-            (eval `(setq ,all-name-exts (append ,all-name-exts ,name-exts)))
+            (eval `(setq ,all-name-exts ',(append all-name-exts name-exts)))
             (eval `(defvar ,all-name-exts ,name-exts)))
         (if titan-exts
-            (eval `(setq ,titan-exts (append ,titan-exts ,name-exts)))
+            (eval `(setq ,titan-exts ',(append titan-exts name-exts)))
             (eval `(defvar ,titan-exts ,name-exts)))
         (eval `(defun ,(meq/inconcat "meq/dired-create-" name "-" mode) nil (interactive)
             (when (derived-mode-p 'dired-mode) (let* ((file (f-join
