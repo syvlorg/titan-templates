@@ -77,7 +77,7 @@
         (eval `(defvar ,name-exts ',(rassoc name-mode exts)))
         (eval `(setq auto-mode-alist ',(append auto-mode-alist name-exts)))
         (if all-name-exts
-            (eval `(setq ,all-name-exts ',(append all-name-exts name-exts)))
+            (eval `(setq ,all-name-exts (append ',all-name-exts ',name-exts)))
             (eval `(defvar ,all-name-exts ,name-exts)))
         (if titan-exts
             (eval `(setq ,titan-exts ',(append titan-exts name-exts)))
