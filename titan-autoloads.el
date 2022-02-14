@@ -6,7 +6,7 @@
 ;;;### (autoloads nil "titan" "titan.el" (0 0 0 0))
 ;;; Generated autoloads from titan.el
 
-(register-definition-prefixes "titan" '("meq/"))
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "titan" '("meq/")))
 
 ;;;***
 

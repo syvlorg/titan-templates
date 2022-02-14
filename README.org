@@ -80,7 +80,7 @@
                             ;; User: https://stackoverflow.com/users/324105/phils
                             default-directory
 
-                            (format "%s.%s.%s" (meq/timestamp) ,name ,ext))))
+                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
                 (with-current-buffer (find-file-noselect file)
                     (meq/insert-snippet (concat (if (featurep 'riot) "org" ,mode) " titan template"))
                     (save-buffer)
@@ -94,7 +94,7 @@
                             ;; User: https://stackoverflow.com/users/324105/phils
                             default-directory
 
-                            (format "%s.%s.%s" (meq/timestamp) ,name ,ext))))
+                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
                 
                 ;; Adapted From:
                 ;; Answer: https://stackoverflow.com/a/17984479/10827766
