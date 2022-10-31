@@ -1,8 +1,4 @@
-;; titan.el
-
-
-;; [[file:README.org::*titan.el][titan.el:1]]
-;;; titan.el --- a simple package                     -*- lexical-binding: t; -*-
+;;; titan-templates.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
 
@@ -117,6 +113,5 @@
             (meq/ddm "titan")
             )))) meq/var/mecons)
 
-(provide 'titan)
-;;; titan.el ends here
-;; titan.el:1 ends here
+(provide 'titan-templates)
+;;; titan-templates.el ends here

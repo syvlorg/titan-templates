@@ -1,10 +1,7 @@
-#+setupfile: ./settings/README.org
-#+include: ./settings/README.org
-
-* titan.el
+* titan-templates.el
 
 #+begin_src emacs-lisp :tangle (meq/tangle-path)
-;;; titan.el --- a simple package                     -*- lexical-binding: t; -*-
+;;; titan-templates.el --- a simple package                     -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2021  Jeet Ray
 
@@ -119,8 +116,8 @@
             (meq/ddm "titan")
             )))) meq/var/mecons)
 
-(provide 'titan)
-;;; titan.el ends here
+(provide 'titan-templates)
+;;; titan-templates.el ends here
 #+end_src
 
 * snippets
