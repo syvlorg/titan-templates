@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-11-14 Mon 09:29 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Jeet Ray" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/primary/syvl.css" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
+<link rel="manifest" href="https://combinatronics.io/sylvorg/settings/main/manifest.json" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/highlight/paraiso-dark.min.css" />
+<script src="https://combinatronics.io/sylvorg/settings/main/src/scripts/highlight/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+<div class="header">
+<h1>We Are Syvlorg.</h1>
+<a href="">About Me</a>
+<a href="">About This Website</a>
+<a href="">About Syvlorg</a>
+<a href="https://resume.syvl.org">Résumé</a>
+<a href="https://index.syvl.org">Index</a>
+</div>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org1d575ca">titan-templates.el</a></li>
+<li><a href="#org6567206">snippets</a>
+<ul>
+<li><a href="#orgd34dd6d">titan-markdown-mode</a>
+<ul>
+<li><a href="#orga238bcc">titan</a></li>
+</ul>
+</li>
+<li><a href="#orgd0f8ed4">titan-org-mode</a>
+<ul>
+<li><a href="#orgc211b1f">titan</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1d575ca" class="outline-2">
+<h2 id="org1d575ca">titan-templates.el</h2>
+<div class="outline-text-2" id="text-org1d575ca">
+<div class="org-src-container">
+<pre><code class="language-lisp match-braces rainbow-braces">;;; titan-templates.el --- a simple package                     -*- lexical-binding: t; -*-
+
+;; Copyright (C) 2021  Jeet Ray
+
+;; Author: Jeet Ray &lt;aiern@protonmail.com&gt;
+;; Keywords: lisp
+;; Version: 0.0.1
+
+;; This program is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; This program is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+
+;;; Commentary:
+
+;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el
+
+;;; Code:
+
+(require 'meq)
+(require 'yasnippet)
+(require 'f)
+
+(defvar meq/var/mecons '((org . org)
+    (markdown . md)
+    (adoc . adoc)))
+    
+(defun meq/titan-append-modes (mode &amp;rest exts)
+    (let* ((titan-exts (meq/inconcat "meq/var/titan-" mode "-exts")))
+        (if (ignore-errors (symbol-value titan-exts))
+            ;; `('(,@(symbol-value titan-exts) ,@exts))
+            (append (symbol-value titan-exts) exts)
+            exts)))
+
+(defun meq/ddm (name)
+    (let* ((snippets (meq/inconcat "meq/var/" name "-snippets-dir")))
+        (defcustom meq/var/titan-snippets-dir user-emacs-directory "The titan snippets directory")
+        (when (f-exists? meq/var/titan-snippets-dir)
+            (add-to-list 'yas-snippet-dirs meq/var/titan-snippets-dir t)
+            (yas-load-directory meq/var/titan-snippets-dir t))
+        (eval `(defcustom ,snippets user-emacs-directory (format "The %s snippets directory" ,name)))
+        (when (eval `(f-exists? ,snippets))
+            (add-to-list 'yas-snippet-dirs (symbol-value snippets) t)
+            (eval `(yas-load-directory ,snippets t)))))
+
+(defun meq/mapc-ddm (name exts &amp;optional mecons* &amp;rest args) (mapc #'(lambda (mecons) (interactive)
+    (let* ((mode (symbol-name (car mecons)))
+            (ext (symbol-name (cdr mecons)))
+            (titan-exts (meq/inconcat "meq/var/titan-" mode "-exts"))
+            (name-exts (meq/inconcat "meq/var/" name "-" mode "-exts"))
+            (all-name-exts (meq/inconcat "meq/var/" name "-exts"))
+            (name-mode (meq/inconcat name "-" mode "-mode")))
+        (eval `(defvar ,name-exts ',(rassoc name-mode exts)))
+        (eval `(setq auto-mode-alist (append auto-mode-alist '(,(symbol-value name-exts)))))
+        (if (ignore-errors (symbol-value all-name-exts))
+            (eval `(setq ,all-name-exts (append ',(symbol-value all-name-exts) '(,(symbol-value name-exts)))))
+            (eval `(defvar ,all-name-exts '(,(symbol-value name-exts)))))
+        (if (ignore-errors (symbol-value titan-exts))
+            (eval `(setq ,titan-exts (append ',(symbol-value titan-exts) '(,(symbol-value name-exts)))))
+            (eval `(defvar ,titan-exts '(,(symbol-value name-exts)))))
+        (eval `(defun ,(meq/inconcat "meq/dired-create-" name "-" mode) nil (interactive)
+            (when (derived-mode-p 'dired-mode) (let* ((file (f-join
+
+                            ;; Adapted From:
+                            ;; Answer: https://stackoverflow.com/a/11046990/10827766
+                            ;; User: https://stackoverflow.com/users/324105/phils
+                            default-directory
+
+                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
+                (with-current-buffer (find-file-noselect file)
+                    (meq/insert-snippet (concat (if (featurep 'riot) "org" ,mode) " titan template"))
+                    (save-buffer)
+                    (kill-buffer))
+                (revert-buffer)))))
+        (eval `(defun ,(meq/inconcat "meq/dired-create-and-open-" name "-" mode) nil (interactive)
+            (when (derived-mode-p 'dired-mode) (let* ((file (f-join
+
+                            ;; Adapted From:
+                            ;; Answer: https://stackoverflow.com/a/11046990/10827766
+                            ;; User: https://stackoverflow.com/users/324105/phils
+                            default-directory
+
+                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
+                
+                ;; Adapted From:
+                ;; Answer: https://stackoverflow.com/a/17984479/10827766
+                ;; User: https://stackoverflow.com/users/2321928/bnzmnzhnz
+                (unless (display-graphic-p) (other-window -1))
+
+                (find-file file)
+                (meq/insert-snippet (concat (if (featurep 'riot) "org" ,mode) " titan template"))))))
+        (eval `(define-derived-mode
+            ,name-mode
+            ,(meq/inconcat "titan-" mode "-mode")
+            (meq/ddm ,name)
+            ,@args)))) (or mecons* meq/var/mecons)))
+
+(mapc #'(lambda (mecons) (interactive)
+    (let* ((mode (symbol-name (car mecons)))
+            (ext (symbol-name (cdr mecons))))
+        (eval `(define-derived-mode
+            ,(meq/inconcat "titan-" mode "-mode")
+            ,(meq/inconcat mode "-mode")
+            ;; ,(concat "titan-" mode)
+            (meq/ddm "titan")
+            )))) meq/var/mecons)
+
+(provide 'titan-templates)
+;;; titan-templates.el ends here
+</code></pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6567206" class="outline-2">
+<h2 id="org6567206">snippets</h2>
+<div class="outline-text-2" id="text-org6567206">
+</div>
+<div id="outline-container-orgd34dd6d" class="outline-3">
+<h3 id="orgd34dd6d">titan-markdown-mode</h3>
+<div class="outline-text-3" id="text-orgd34dd6d">
+</div>
+<div id="outline-container-orga238bcc" class="outline-4">
+<h4 id="orga238bcc">titan</h4>
+<div class="outline-text-4" id="text-orga238bcc">
+<div class="org-src-container">
+<pre><code class="language-markdown match-braces rainbow-braces"># key: template
+# name: markdown titan template
+# binding: m
+# --
+# `(meq/basename)`
+
+------------------------------------------------------------------------
+
+## Links
+
+------------------------------------------------------------------------
+
+## Tags
+
+------------------------------------------------------------------------
+
+## Notes
+
+------------------------------------------------------------------------
+
+## Contents
+$0
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd0f8ed4" class="outline-3">
+<h3 id="orgd0f8ed4">titan-org-mode</h3>
+<div class="outline-text-3" id="text-orgd0f8ed4">
+</div>
+<div id="outline-container-orgc211b1f" class="outline-4">
+<h4 id="orgc211b1f">titan</h4>
+<div class="outline-text-4" id="text-orgc211b1f">
+<div class="org-src-container">
+<pre><code class="language-org match-braces rainbow-braces"># key: template
+# name: org titan template
+# binding: o
+# --
+* `(meq/basename)`
+
+--------------
+
+** Links
+
+--------------
+
+** Tags
+
+--------------
+
+** Notes
+
+--------------
+
+** Contents
+$0
+</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Jeet Ray</p>
+<p class="date">Created: 2022-11-14 Mon 09:29</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
