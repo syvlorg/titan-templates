@@ -3,18 +3,18 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-11-14 Mon 09:29 -->
+<!-- 2023-09-04 Mon 12:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
-<meta name="generator" content="Org mode" />
 <meta name="author" content="Jeet Ray" />
-<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/primary/syvl.css" />
-<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
-<link rel="icon" href="https://combinatronics.io/sylvorg/settings/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
-<link rel="manifest" href="https://combinatronics.io/sylvorg/settings/main/manifest.json" />
-<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/settings/main/src/styles/highlight/paraiso-dark.min.css" />
-<script src="https://combinatronics.io/sylvorg/settings/main/src/scripts/highlight/highlight.min.js"></script>
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/bundle/main/src/styles/primary/syvl.css" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/bundle/main/src/icons/favicons/shiny-zigzagoon-galar.ico" sizes="any" />
+<link rel="icon" href="https://combinatronics.io/sylvorg/bundle/main/src/icons/favicons/shiny-zigzagoon-galar.svg" />
+<link rel="manifest" href="https://combinatronics.io/sylvorg/bundle/main/manifest.json" />
+<link rel="stylesheet" type="text/css" href="https://combinatronics.io/sylvorg/bundle/main/src/styles/highlight/paraiso-dark.min.css" />
+<script src="https://combinatronics.io/sylvorg/bundle/main/src/scripts/highlight/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
 <div class="header">
 <h1>We Are Syvlorg.</h1>
@@ -24,46 +24,24 @@
 <a href="https://resume.syvl.org">Résumé</a>
 <a href="https://index.syvl.org">Index</a>
 </div>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
-<div id="content">
-<div id="table-of-contents">
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
-<div id="text-table-of-contents">
+<div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1d575ca">titan-templates.el</a></li>
-<li><a href="#org6567206">snippets</a>
+<li><a href="#org40de5ff">titan-templates.el</a></li>
+<li><a href="#orgf552fda">snippets</a>
 <ul>
-<li><a href="#orgd34dd6d">titan-markdown-mode</a>
+<li><a href="#org74c9d26">titan-markdown-mode</a>
 <ul>
-<li><a href="#orga238bcc">titan</a></li>
+<li><a href="#org6c28e9f">titan</a></li>
 </ul>
 </li>
-<li><a href="#orgd0f8ed4">titan-org-mode</a>
+<li><a href="#org9344c56">titan-org-mode</a>
 <ul>
-<li><a href="#orgc211b1f">titan</a></li>
+<li><a href="#org8016379">titan</a></li>
 </ul>
 </li>
 </ul>
@@ -72,143 +50,143 @@
 </div>
 </div>
 
-<div id="outline-container-org1d575ca" class="outline-2">
-<h2 id="org1d575ca">titan-templates.el</h2>
-<div class="outline-text-2" id="text-org1d575ca">
+<div id="outline-container-org40de5ff" class="outline-2">
+<h2 id="org40de5ff">titan-templates.el</h2>
+<div class="outline-text-2" id="text-org40de5ff">
 <div class="org-src-container">
-<pre><code class="language-lisp match-braces rainbow-braces">;;; titan-templates.el --- a simple package                     -*- lexical-binding: t; -*-
+<pre><code class="language-lisp match-braces rainbow-braces"><span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">titan-templates.el --- a simple package                     -*- lexical-binding: t; -*-</span>
 
-;; Copyright (C) 2021  Jeet Ray
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Copyright (C) 2021  Jeet Ray</span>
 
-;; Author: Jeet Ray &lt;aiern@protonmail.com&gt;
-;; Keywords: lisp
-;; Version: 0.0.1
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Author: Jeet Ray <a href="mailto:aiern%40protonmail.com">&lt;aiern@protonmail.com&gt;</a></span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Keywords: lisp</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Version: 0.0.1</span>
 
-;; This program is free software; you can redistribute it and/or modify
-;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation, either version 3 of the License, or
-;; (at your option) any later version.
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This program is free software; you can redistribute it and/or modify</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">it under the terms of the GNU General Public License as published by</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">the Free Software Foundation, either version 3 of the License, or</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">(at your option) any later version.</span>
 
-;; This program is distributed in the hope that it will be useful,
-;; but WITHOUT ANY WARRANTY; without even the implied warranty of
-;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-;; GNU General Public License for more details.
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">This program is distributed in the hope that it will be useful,</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">GNU General Public License for more details.</span>
 
-;; You should have received a copy of the GNU General Public License
-;; along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">You should have received a copy of the GNU General Public License</span>
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">along with this program.  If not, see <a href="http://www.gnu.org/licenses/">&lt;http://www.gnu.org/licenses/&gt;</a>.</span>
 
-;;; Commentary:
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">Commentary:</span>
 
-;; Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el
+<span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From: https://github.com/AndreaCrotti/yasnippet-snippets/blob/master/yasnippet-snippets.el</span>
 
-;;; Code:
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">Code:</span>
 
-(require 'meq)
-(require 'yasnippet)
-(require 'f)
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">meq</span>)
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">yasnippet</span>)
+(<span style="font-weight: bold;">require</span> '<span style="font-weight: bold; text-decoration: underline;">f</span>)
 
-(defvar meq/var/mecons '((org . org)
+(<span style="font-weight: bold;">defvar</span> <span style="font-weight: bold; font-style: italic;">meq/var/mecons</span> '((org . org)
     (markdown . md)
     (adoc . adoc)))
     
-(defun meq/titan-append-modes (mode &amp;rest exts)
-    (let* ((titan-exts (meq/inconcat "meq/var/titan-" mode "-exts")))
-        (if (ignore-errors (symbol-value titan-exts))
-            ;; `('(,@(symbol-value titan-exts) ,@exts))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">meq/titan-append-modes</span> (mode <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> exts)
+    (<span style="font-weight: bold;">let*</span> ((titan-exts (meq/inconcat <span style="font-style: italic;">"meq/var/titan-"</span> mode <span style="font-style: italic;">"-exts"</span>)))
+        (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">ignore-errors</span> (symbol-value titan-exts))
+            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">`('(,@(symbol-value titan-exts) ,@exts))</span>
             (append (symbol-value titan-exts) exts)
             exts)))
 
-(defun meq/ddm (name)
-    (let* ((snippets (meq/inconcat "meq/var/" name "-snippets-dir")))
-        (defcustom meq/var/titan-snippets-dir user-emacs-directory "The titan snippets directory")
-        (when (f-exists? meq/var/titan-snippets-dir)
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">meq/ddm</span> (name)
+    (<span style="font-weight: bold;">let*</span> ((snippets (meq/inconcat <span style="font-style: italic;">"meq/var/"</span> name <span style="font-style: italic;">"-snippets-dir"</span>)))
+        (<span style="font-weight: bold;">defcustom</span> <span style="font-weight: bold; font-style: italic;">meq/var/titan-snippets-dir</span> user-emacs-directory <span style="font-style: italic;">"The titan snippets directory"</span>)
+        (<span style="font-weight: bold;">when</span> (f-exists? meq/var/titan-snippets-dir)
             (add-to-list 'yas-snippet-dirs meq/var/titan-snippets-dir t)
             (yas-load-directory meq/var/titan-snippets-dir t))
-        (eval `(defcustom ,snippets user-emacs-directory (format "The %s snippets directory" ,name)))
-        (when (eval `(f-exists? ,snippets))
+        (eval `(<span style="font-weight: bold;">defcustom</span> ,snippets user-emacs-directory (format <span style="font-style: italic;">"The %s snippets directory"</span> ,name)))
+        (<span style="font-weight: bold;">when</span> (eval `(f-exists? ,snippets))
             (add-to-list 'yas-snippet-dirs (symbol-value snippets) t)
             (eval `(yas-load-directory ,snippets t)))))
 
-(defun meq/mapc-ddm (name exts &amp;optional mecons* &amp;rest args) (mapc #'(lambda (mecons) (interactive)
-    (let* ((mode (symbol-name (car mecons)))
+(<span style="font-weight: bold;">defun</span> <span style="font-weight: bold;">meq/mapc-ddm</span> (name exts <span style="font-weight: bold; text-decoration: underline;">&amp;optional</span> mecons* <span style="font-weight: bold; text-decoration: underline;">&amp;rest</span> args) (mapc #'(<span style="font-weight: bold;">lambda</span> (mecons) (<span style="font-weight: bold;">interactive</span>)
+    (<span style="font-weight: bold;">let*</span> ((mode (symbol-name (car mecons)))
             (ext (symbol-name (cdr mecons)))
-            (titan-exts (meq/inconcat "meq/var/titan-" mode "-exts"))
-            (name-exts (meq/inconcat "meq/var/" name "-" mode "-exts"))
-            (all-name-exts (meq/inconcat "meq/var/" name "-exts"))
-            (name-mode (meq/inconcat name "-" mode "-mode")))
-        (eval `(defvar ,name-exts ',(rassoc name-mode exts)))
-        (eval `(setq auto-mode-alist (append auto-mode-alist '(,(symbol-value name-exts)))))
-        (if (ignore-errors (symbol-value all-name-exts))
-            (eval `(setq ,all-name-exts (append ',(symbol-value all-name-exts) '(,(symbol-value name-exts)))))
-            (eval `(defvar ,all-name-exts '(,(symbol-value name-exts)))))
-        (if (ignore-errors (symbol-value titan-exts))
-            (eval `(setq ,titan-exts (append ',(symbol-value titan-exts) '(,(symbol-value name-exts)))))
-            (eval `(defvar ,titan-exts '(,(symbol-value name-exts)))))
-        (eval `(defun ,(meq/inconcat "meq/dired-create-" name "-" mode) nil (interactive)
-            (when (derived-mode-p 'dired-mode) (let* ((file (f-join
+            (titan-exts (meq/inconcat <span style="font-style: italic;">"meq/var/titan-"</span> mode <span style="font-style: italic;">"-exts"</span>))
+            (name-exts (meq/inconcat <span style="font-style: italic;">"meq/var/"</span> name <span style="font-style: italic;">"-"</span> mode <span style="font-style: italic;">"-exts"</span>))
+            (all-name-exts (meq/inconcat <span style="font-style: italic;">"meq/var/"</span> name <span style="font-style: italic;">"-exts"</span>))
+            (name-mode (meq/inconcat name <span style="font-style: italic;">"-"</span> mode <span style="font-style: italic;">"-mode"</span>)))
+        (eval `(<span style="font-weight: bold;">defvar</span> ,name-exts ',(rassoc name-mode exts)))
+        (eval `(<span style="font-weight: bold;">setq</span> auto-mode-alist (append auto-mode-alist '(,(symbol-value name-exts)))))
+        (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">ignore-errors</span> (symbol-value all-name-exts))
+            (eval `(<span style="font-weight: bold;">setq</span> ,all-name-exts (append ',(symbol-value all-name-exts) '(,(symbol-value name-exts)))))
+            (eval `(<span style="font-weight: bold;">defvar</span> ,all-name-exts '(,(symbol-value name-exts)))))
+        (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">ignore-errors</span> (symbol-value titan-exts))
+            (eval `(<span style="font-weight: bold;">setq</span> ,titan-exts (append ',(symbol-value titan-exts) '(,(symbol-value name-exts)))))
+            (eval `(<span style="font-weight: bold;">defvar</span> ,titan-exts '(,(symbol-value name-exts)))))
+        (eval `(<span style="font-weight: bold;">defun</span> ,(meq/inconcat <span style="font-style: italic;">"meq/dired-create-"</span> name <span style="font-style: italic;">"-"</span> mode) nil (<span style="font-weight: bold;">interactive</span>)
+            (<span style="font-weight: bold;">when</span> (derived-mode-p 'dired-mode) (<span style="font-weight: bold;">let*</span> ((file (f-join
 
-                            ;; Adapted From:
-                            ;; Answer: https://stackoverflow.com/a/11046990/10827766
-                            ;; User: https://stackoverflow.com/users/324105/phils
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From:</span>
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Answer: https://stackoverflow.com/a/11046990/10827766</span>
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">User: https://stackoverflow.com/users/324105/phils</span>
                             default-directory
 
-                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
-                (with-current-buffer (find-file-noselect file)
-                    (meq/insert-snippet (concat (if (featurep 'riot) "org" ,mode) " titan template"))
+                            (format <span style="font-style: italic;">"%s.%s.%s"</span> (meq/named-uuid ,name) ,name ,ext))))
+                (<span style="font-weight: bold;">with-current-buffer</span> (find-file-noselect file)
+                    (meq/insert-snippet (concat (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">featurep</span> '<span style="font-weight: bold; text-decoration: underline;">riot</span>) <span style="font-style: italic;">"org"</span> ,mode) <span style="font-style: italic;">" titan template"</span>))
                     (save-buffer)
                     (kill-buffer))
                 (revert-buffer)))))
-        (eval `(defun ,(meq/inconcat "meq/dired-create-and-open-" name "-" mode) nil (interactive)
-            (when (derived-mode-p 'dired-mode) (let* ((file (f-join
+        (eval `(<span style="font-weight: bold;">defun</span> ,(meq/inconcat <span style="font-style: italic;">"meq/dired-create-and-open-"</span> name <span style="font-style: italic;">"-"</span> mode) nil (<span style="font-weight: bold;">interactive</span>)
+            (<span style="font-weight: bold;">when</span> (derived-mode-p 'dired-mode) (<span style="font-weight: bold;">let*</span> ((file (f-join
 
-                            ;; Adapted From:
-                            ;; Answer: https://stackoverflow.com/a/11046990/10827766
-                            ;; User: https://stackoverflow.com/users/324105/phils
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From:</span>
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Answer: https://stackoverflow.com/a/11046990/10827766</span>
+                            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">User: https://stackoverflow.com/users/324105/phils</span>
                             default-directory
 
-                            (format "%s.%s.%s" (meq/named-uuid ,name) ,name ,ext))))
+                            (format <span style="font-style: italic;">"%s.%s.%s"</span> (meq/named-uuid ,name) ,name ,ext))))
                 
-                ;; Adapted From:
-                ;; Answer: https://stackoverflow.com/a/17984479/10827766
-                ;; User: https://stackoverflow.com/users/2321928/bnzmnzhnz
-                (unless (display-graphic-p) (other-window -1))
+                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Adapted From:</span>
+                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">Answer: https://stackoverflow.com/a/17984479/10827766</span>
+                <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">User: https://stackoverflow.com/users/2321928/bnzmnzhnz</span>
+                (<span style="font-weight: bold;">unless</span> (display-graphic-p) (other-window -1))
 
                 (find-file file)
-                (meq/insert-snippet (concat (if (featurep 'riot) "org" ,mode) " titan template"))))))
-        (eval `(define-derived-mode
+                (meq/insert-snippet (concat (<span style="font-weight: bold;">if</span> (<span style="font-weight: bold;">featurep</span> '<span style="font-weight: bold; text-decoration: underline;">riot</span>) <span style="font-style: italic;">"org"</span> ,mode) <span style="font-style: italic;">" titan template"</span>))))))
+        (eval `(<span style="font-weight: bold;">define-derived-mode</span>
             ,name-mode
-            ,(meq/inconcat "titan-" mode "-mode")
+            ,(meq/inconcat <span style="font-style: italic;">"titan-"</span> mode <span style="font-style: italic;">"-mode"</span>)
             (meq/ddm ,name)
-            ,@args)))) (or mecons* meq/var/mecons)))
+            ,@args)))) <span style="font-weight: bold;">(</span><span style="font-weight: bold;">or</span><span style="font-weight: bold;"> mecons* meq/var/mecons)))</span>
 
-(mapc #'(lambda (mecons) (interactive)
-    (let* ((mode (symbol-name (car mecons)))
+(mapc #'(<span style="font-weight: bold;">lambda</span> (mecons) (<span style="font-weight: bold;">interactive</span>)
+    (<span style="font-weight: bold;">let*</span> ((mode (symbol-name (car mecons)))
             (ext (symbol-name (cdr mecons))))
-        (eval `(define-derived-mode
-            ,(meq/inconcat "titan-" mode "-mode")
-            ,(meq/inconcat mode "-mode")
-            ;; ,(concat "titan-" mode)
-            (meq/ddm "titan")
-            )))) meq/var/mecons)
+        (eval `(<span style="font-weight: bold;">define-derived-mode</span>
+            ,(meq/inconcat <span style="font-style: italic;">"titan-"</span> mode <span style="font-style: italic;">"-mode"</span>)
+            ,(meq/inconcat mode <span style="font-style: italic;">"-mode"</span>)
+            <span style="font-weight: bold; font-style: italic;">;; </span><span style="font-weight: bold; font-style: italic;">,(concat "titan-" mode)</span>
+            (meq/ddm <span style="font-style: italic;">"titan"</span>)
+            )))) <span style="font-weight: bold;">meq/var/mecons)</span>
 
-(provide 'titan-templates)
-;;; titan-templates.el ends here
+(<span style="font-weight: bold;">provide</span> '<span style="font-weight: bold; text-decoration: underline;">titan-templates</span>)
+<span style="font-weight: bold; font-style: italic;">;;; </span><span style="font-weight: bold; font-style: italic;">titan-templates.el ends here</span>
 </code></pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org6567206" class="outline-2">
-<h2 id="org6567206">snippets</h2>
-<div class="outline-text-2" id="text-org6567206">
+<div id="outline-container-orgf552fda" class="outline-2">
+<h2 id="orgf552fda">snippets</h2>
+<div class="outline-text-2" id="text-orgf552fda">
 </div>
-<div id="outline-container-orgd34dd6d" class="outline-3">
-<h3 id="orgd34dd6d">titan-markdown-mode</h3>
-<div class="outline-text-3" id="text-orgd34dd6d">
+<div id="outline-container-org74c9d26" class="outline-3">
+<h3 id="org74c9d26">titan-markdown-mode</h3>
+<div class="outline-text-3" id="text-org74c9d26">
 </div>
-<div id="outline-container-orga238bcc" class="outline-4">
-<h4 id="orga238bcc">titan</h4>
-<div class="outline-text-4" id="text-orga238bcc">
+<div id="outline-container-org6c28e9f" class="outline-4">
+<h4 id="org6c28e9f">titan</h4>
+<div class="outline-text-4" id="text-org6c28e9f">
 <div class="org-src-container">
 <pre><code class="language-markdown match-braces rainbow-braces"># key: template
 # name: markdown titan template
@@ -238,35 +216,35 @@ $0
 </div>
 </div>
 
-<div id="outline-container-orgd0f8ed4" class="outline-3">
-<h3 id="orgd0f8ed4">titan-org-mode</h3>
-<div class="outline-text-3" id="text-orgd0f8ed4">
+<div id="outline-container-org9344c56" class="outline-3">
+<h3 id="org9344c56">titan-org-mode</h3>
+<div class="outline-text-3" id="text-org9344c56">
 </div>
-<div id="outline-container-orgc211b1f" class="outline-4">
-<h4 id="orgc211b1f">titan</h4>
-<div class="outline-text-4" id="text-orgc211b1f">
+<div id="outline-container-org8016379" class="outline-4">
+<h4 id="org8016379">titan</h4>
+<div class="outline-text-4" id="text-org8016379">
 <div class="org-src-container">
-<pre><code class="language-org match-braces rainbow-braces"># key: template
-# name: org titan template
-# binding: o
-# --
-* `(meq/basename)`
+<pre><code class="language-org match-braces rainbow-braces"><span style="font-weight: bold; font-style: italic;"># key: template</span>
+<span style="font-weight: bold; font-style: italic;"># name: org titan template</span>
+<span style="font-weight: bold; font-style: italic;"># binding: o</span>
+<span style="font-weight: bold; font-style: italic;"># --</span>
+<span style="font-weight: bold;">* `(meq/basename)`</span>
 
 --------------
 
-** Links
+<span style="font-weight: bold; font-style: italic;">** Links</span>
 
 --------------
 
-** Tags
+<span style="font-weight: bold; font-style: italic;">** Tags</span>
 
 --------------
 
-** Notes
+<span style="font-weight: bold; font-style: italic;">** Notes</span>
 
 --------------
 
-** Contents
+<span style="font-weight: bold; font-style: italic;">** Contents</span>
 $0
 </code></pre>
 </div>
@@ -277,7 +255,7 @@ $0
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Jeet Ray</p>
-<p class="date">Created: 2022-11-14 Mon 09:29</p>
+<p class="date">Created: 2023-09-04 Mon 12:26</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
